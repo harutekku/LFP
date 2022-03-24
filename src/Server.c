@@ -209,6 +209,7 @@ int GetServerSocket(const char* port, bool useIP6) {
             continue;
         } else if(setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &resolve, sizeof(int)) == -1) {
             ERROR("setsockopt: %s\n", strerror(errno));
+            close(fd);
             freeaddrinfo(res);
             return -1;
         } else if (bind(fd, i->ai_addr, i->ai_addrlen) == -1) {
