@@ -10,7 +10,7 @@
  * @brief 
  *   Describes program version
  */
-const char* argp_program_version = "v0.1";
+const char* argp_program_version = "version 0.1";
 
 /**
  * @brief 
@@ -19,7 +19,7 @@ const char* argp_program_version = "v0.1";
  */
 struct Arguments {
     ProgramArgs* Args;
-    int_fast32_t Size;
+    int Size;
 };
 
 /**
@@ -27,9 +27,9 @@ struct Arguments {
  *    Program options
  */
 static const struct argp_option options[] = {
-    { "ip6",   69420, NULL,   0, "Use IPv6 for connection", 0 },
+    { "ip6",  1488,     NULL, 0, "Use IPv6 for connection", 0 },
     { "mode",  'm',   "MODE", 0, "Mode to run in",          0 },
-    { "input", 'i',   "FILE", 0, "File to send",            0 },
+    { "input", 'i',     NULL, 0, "Treat FILE as input",     0 },
     {                         0                               }
 };
 
@@ -52,19 +52,18 @@ static void ParseMode(const char* arg, struct Arguments* args, struct argp_state
 static int ParseOptions(int key, char* arg, struct argp_state* state) {
     struct Arguments* args = state->input;
     switch (key) {
-    case 69420:
+    case 1488:
         args->Args->RunIP6 = true;
         break;
     case 'm':
         ParseMode(arg, args, state);
         break;
     case 'i':
-        args->Args->InputFile = arg;
+        args->Args->TreatAsInput = true;
         break;
     case ARGP_KEY_ARG:
         --args->Size;
         if (args->Size == 1)
-            // TODO: Verify IP address
             args->Args->TargetIP = arg;
         else if (args->Size == 0)
             args->Args->ResName = arg;
@@ -79,8 +78,8 @@ static int ParseOptions(int key, char* arg, struct argp_state* state) {
     return 0;
 }
 
-int_fast32_t ParseArgs(const int32_t argc, const char* argv[], ProgramArgs* pargs) {
+int ParseArgs(const int argc, const char* argv[], ProgramArgs* pargs) {
     const struct argp argp = { options, ParseOptions, "IP FILE\n", "", NULL, NULL, NULL };
-    struct Arguments args = { pargs, 2 };
+    struct Arguments  args = { pargs, 2 };
     return argp_parse(&argp, argc, (char**)argv, 0, 0, &args);
 }

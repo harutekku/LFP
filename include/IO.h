@@ -9,23 +9,23 @@
  *   Write data from `DataPacket` to a file
  * @param file
  *   A pointer to the open file
- * @param packet 
+ * @param[in] packet 
  *   A pointer to `DataPacket` object to write from
- * @return int_fast32_t 
+ * @return size_t
  *   Number of bytes written
  */
-int_fast32_t DeserializePacket(FILE*, DataPacket*);
+size_t DeserializePacket(FILE*, const DataPacket*);
 
 /**
  * @brief 
  *   Read data from a file to a `DataPacket`
  * @param file
  *   A pointer to the open file
- * @param packet 
+ * @param[out] packet 
  *   A pointer to `DataPacket` object to read to
- * @return int_fast32_t 
+ * @return int
  *   Number of bytes read
  */
-int_fast32_t SerializePacket(FILE*, DataPacket*);
+size_t SerializePacket(FILE*, DataPacket*);
 
 #endif

@@ -10,11 +10,11 @@
  *   Count of command line arguments
  * @param argv
  *   Argument vector
- * @param pargs
+ * @param[out] pargs
  *   Structure to hold parsed values
- * @return int_fast32_t
+ * @return int
  *   Returns -1 on failure, 0 on success
  */
-int_fast32_t ParseArgs(const int32_t, const char*[], ProgramArgs*);
+int ParseArgs(const int, const char*[], ProgramArgs*);
 
 #endif

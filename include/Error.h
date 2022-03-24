@@ -5,16 +5,28 @@
 
 /**
  * @brief 
- *   Send an error packet to a remote machine
+ *   Send an error packet with a standard error message to a remote machine
  * @param fd
  *   A valid file descriptor
- * @param address
- *   Address of the remote machine to send to
+ * @param[in] address
+ *   An address of the remote machine to send to
  * @param ec 
- *   Error code to send
- * @return
- *   Nothing
+ *   A TFTP error code to send
+ * @return void
  */
-void HandleError(const int32_t, Address*, uint8_t);
+void StandardOutError(int, const Address*, int);
+
+/**
+ * @brief 
+ *   Send an error packet with a custom error message to a remote machine
+ * @param fd
+ *   A valid file descriptor
+ * @param[in] address
+ *   An address of the remote machine to send to
+ * @param str 
+ *   Custom string message
+ * @return void
+ */
+void CustomOutError(int, const Address*, const char*);
 
 #endif
