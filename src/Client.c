@@ -12,11 +12,10 @@
 #include <errno.h>
 // Unix
 #include <netdb.h>
-#include <time.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-
+    
 static int ReceiveInitialACK(int fd, Address* address, AckPacket* packet) {
     ssize_t status;
 
@@ -65,7 +64,7 @@ static int HandleClientRead(int fd, FILE* file, Address* address) {
             ack.Block = data.Block;
             retries = 5;
         }
-
+            
         //-------------------------------------------------------------------
         // Acknowledge current block
         SendACK(fd, address, &ack);

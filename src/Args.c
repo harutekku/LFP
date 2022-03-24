@@ -19,7 +19,7 @@ const char* argp_program_version = "version 0.1";
  */
 struct Arguments {
     ProgramArgs* Args;
-    int Size;
+    int          Size;
 };
 
 /**

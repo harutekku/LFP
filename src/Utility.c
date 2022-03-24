@@ -52,7 +52,7 @@ ssize_t ReceiveFrom(int fd, void* buffer, size_t size, int flags, Address* addre
     //-------------------------------------------------------------------
     // Variables
     ssize_t          res;
-    static const int timeout = -1;
+    static const int timeout = 10000;
     struct pollfd    fds     = { .fd = fd, .events = POLLIN };
     
     //-------------------------------------------------------------------
